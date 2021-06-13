@@ -4,6 +4,7 @@ from torch.utils.data import Dataset, DataLoader
 from model import TranE
 from prepare_data import TrainSet, TestSet
 import numpy as np
+import pandas as pd
 
 device = torch.device('cuda')
 embed_dim = 50
@@ -20,6 +21,14 @@ top_k = 10
 def main():
     import pdb
     pdb.set_trace()
+    entity2label = pd.read_csv('./Wiki15k/entity2label.txt', sep='\t', header=None,
+                           names=['entity', 'name'],
+                           keep_default_na=False, encoding='utf-8')
+    entity2label = entity2label.set_index('entity').squeeze().T.to_dict()
+    relation2label = pd.read_csv('./Wiki15k/relation2label.txt', sep='\t', header=None,
+                               names=['relation', 'name'],
+                               keep_default_na=False, encoding='utf-8')
+    relation2label = relation2label.set_index('relation').squeeze().T.to_dict()
     train_dataset = TrainSet()
     test_dataset = TestSet()
     test_dataset.convert_word_to_index(train_dataset.entity_to_index, train_dataset.relation_to_index,
@@ -71,6 +80,7 @@ def main():
         data = data.to(device)
         # data: [batch_size, 3] => [3, batch_size]
         data = torch.transpose(data, 0, 1)
+
         corrct_test_top1_tail += transe.tail_predict(data[0], data[1], data[2], k=1)
         corrct_test_top1_head += transe.head_predict(data[0], data[1], data[2], k=1)
         corrct_test_top3_tail += transe.tail_predict(data[0], data[1], data[2], k=3)
@@ -83,16 +93,34 @@ def main():
     print(f"Top 10 test accuracy {(corrct_test_top10_tail + corrct_test_top10_head)/ 2  / test_dataset.__len__()}")
     print(f"MRR {np.mean(mrr_average)}")
 
+    def print_relation(head, relatioon, tail, top_10_index):
+        head = train_dataset.index_to_entity[head]
+        tail = train_dataset.index_to_entity[tail]
+        relatioon = train_dataset.index_to_relation[relatioon]
+        top_10_index_list = []
+        for i in range(10):
+            top_10_index_list.append(train_dataset.index_to_entity[top_10_index[i]])
+
+        print(f'{entity2label[head]}+{relation2label[relatioon]}={entity2label[tail]}')
+        print('tail query')
+        for i in range(10):
+            print(f'{entity2label[top_10_index_list[i]]}')
     import pdb
     pdb.set_trace()
     for batch_idx, data in enumerate(test_loader):
         data = data.to(device)
         # data: [batch_size, 3] => [3, batch_size]
-        data = torch.transpose(data, 0, 1)
-        top10_index = transe.tail_top_10(data[0], data[1], data[2])
-        train_dataset.index_to_relation
-        for v in top10_index:
-            print(train_dataset.index_to_entity[v])
+        data_ = torch.transpose(data, 0, 1)
+        top10_index = transe.tail_top_10(data_[0], data_[1], data_[2])
+
+    for i in range(3):
+        head, relatioon, tail = data[i].cpu().numpy()
+        top_10_index = top10_index[i].cpu().numpy()
+        print_relation(head, relatioon, tail, top_10_index)
+
+
+    for v in top10_index:
+        print(train_dataset.index_to_entity[v])
 
     transe.entity_embedding.weight.data
 
