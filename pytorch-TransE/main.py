@@ -101,7 +101,7 @@ def main():
         for i in range(10):
             top_10_index_list.append(train_dataset.index_to_entity[top_10_index[i]])
 
-        print(f'{entity2label[head]}+{relation2label[relatioon]}={entity2label[tail]}')
+        print(f'{entity2label[head]} + {relation2label[relatioon]} = {entity2label[tail]}')
         print('tail query')
         for i in range(10):
             print(f'{entity2label[top_10_index_list[i]]}')
@@ -119,12 +119,28 @@ def main():
         top_10_index = top10_index[i].cpu().numpy()
         print_relation(head, relatioon, tail, top_10_index)
 
+    # find relation ship
     import pdb
     pdb.set_trace()
-    for v in top10_index:
-        print(train_dataset.index_to_entity[v])
 
-    transe.entity_embedding.weight.data
+    top10_index = transe.find_nearest_entities(data_[0])
+
+    def print_e_relation(head,  top_10_index):
+        head = train_dataset.index_to_entity[head]
+        top_10_index_list = []
+        for i in range(10):
+            top_10_index_list.append(train_dataset.index_to_entity[top_10_index[i]])
+
+        print(f'{entity2label[head]}')
+        print('tail query')
+        for i in range(10):
+            print(f'{entity2label[top_10_index_list[i]]}')
+        print('*'*10)
+
+    for i in range(3):
+        head, _, _ = data[i].cpu().numpy()
+        top_10_index = top10_index[i].cpu().numpy()
+        print_e_relation(head, top_10_index)
 
 
 
