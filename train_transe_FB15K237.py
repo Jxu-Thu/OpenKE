@@ -5,6 +5,8 @@ from openke.module.loss import MarginLoss
 from openke.module.strategy import NegativeSampling
 from openke.data import TrainDataLoader, TestDataLoader
 
+import pdb
+pdb.set_trace()
 # dataloader for training
 train_dataloader = TrainDataLoader(
 	in_path = "./benchmarks/FB15K237/", 
