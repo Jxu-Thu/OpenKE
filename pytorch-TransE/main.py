@@ -122,7 +122,8 @@ def main():
     # find relation ship
     import pdb
     pdb.set_trace()
-
+    print('--'*20)
+    print('find nearest entitity')
     top10_index = transe.find_nearest_entities(data_[0])
 
     def print_e_relation(head,  top_10_index):
@@ -131,8 +132,8 @@ def main():
         for i in range(10):
             top_10_index_list.append(train_dataset.index_to_entity[top_10_index[i]])
 
-        print(f'{entity2label[head]}')
-        print('tail query')
+        print(f'find {entity2label[head]}')
+        print('nearest entity')
         for i in range(10):
             print(f'{entity2label[top_10_index_list[i]]}')
         print('*'*10)
