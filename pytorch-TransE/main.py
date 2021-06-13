@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 
 # Required parameters
 # NOTE: train tasks and val tasks cannot take command line arguments
-parser.add_argument('--lr', default=0.01)
+parser.add_argument('--lr', default=0.01, type=float)
 args = parser.parse_args()
 device = torch.device('cuda')
 embed_dim = 50
