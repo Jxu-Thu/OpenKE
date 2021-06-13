@@ -14,7 +14,7 @@ parser.add_argument('--lr', default=0.02, type=float)
 args = parser.parse_args()
 device = torch.device('cuda')
 embed_dim = 50
-num_epochs = 75
+num_epochs = 50
 train_batch_size = 32
 test_batch_size = 256
 lr = args.lr
