@@ -5,13 +5,19 @@ from model import TranE
 from prepare_data import TrainSet, TestSet
 import numpy as np
 import pandas as pd
+import argparse
+parser = argparse.ArgumentParser()
 
+# Required parameters
+# NOTE: train tasks and val tasks cannot take command line arguments
+parser.add_argument('--lr', default=0.01)
+args = parser.parse_args()
 device = torch.device('cuda')
 embed_dim = 50
 num_epochs = 50
 train_batch_size = 32
 test_batch_size = 256
-lr = 2e-2
+lr = args.lr
 momentum = 0
 gamma = 1
 d_norm = 2
