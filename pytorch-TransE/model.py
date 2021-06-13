@@ -81,6 +81,49 @@ class TranE(nn.Module):
         tail = tail.view(-1, 1)
         return torch.sum(torch.eq(indices, tail)).item()
 
+    def tail_top_10(self, head, relation, tail, k=10):
+        h_and_r = self.entity_embedding(head) + self.relation_embedding(relation)
+        h_and_r = torch.unsqueeze(h_and_r, dim=1)
+        h_and_r = h_and_r.expand(h_and_r.shape[0], self.entity_num, self.dim)
+        # embed_tail: [batch_size, N, embed_size]
+        embed_tail = self.entity_embedding.weight.data.expand(h_and_r.shape[0], self.entity_num, self.dim)
+        values, indices = torch.topk(torch.norm(h_and_r - embed_tail, dim=2), 10, dim=1, largest=False)
+        return indices
+
+    def head_predict(self, head, relation, tail, k=10):
+        h_and_r = self.entity_embedding(tail) - self.relation_embedding(relation)
+        h_and_r = torch.unsqueeze(h_and_r, dim=1)
+        h_and_r = h_and_r.expand(h_and_r.shape[0], self.entity_num, self.dim)
+        # embed_tail: [batch_size, N, embed_size]
+        embed_tail = self.entity_embedding.weight.data.expand(h_and_r.shape[0], self.entity_num, self.dim)
+        # indices: [batch_size, k]
+        values, indices = torch.topk(torch.norm(h_and_r - embed_tail, dim=2), k, dim=1, largest=False)
+        # tail: [batch_size] => [batch_size, 1]
+        head = head.view(-1, 1)
+        return torch.sum(torch.eq(indices, head)).item()
+
+    def mrr(self, head, relation, tail):
+        h_and_r = self.entity_embedding(tail) - self.relation_embedding(relation)
+        h_and_r = torch.unsqueeze(h_and_r, dim=1)
+        h_and_r = h_and_r.expand(h_and_r.shape[0], self.entity_num, self.dim)
+        # embed_tail: [batch_size, N, embed_size]
+        embed_tail = self.entity_embedding.weight.data.expand(h_and_r.shape[0], self.entity_num, self.dim)
+        # indices: [batch_size, k]
+        return self._mrr(torch.norm(h_and_r + embed_tail, dim=2), head.view(-1, 1))
+        # tail: [batch_size] => [batch_size, 1]
+
+    def mrr_(self, predictions: torch.Tensor, ground_truth_idx: torch.Tensor) -> float:
+        """Calculates mean reciprocal rank (MRR) for given predictions and ground truth values.
+        :param predictions: BxN tensor of prediction values where B is batch size and N number of classes. Predictions
+        must be sorted in class ids order
+        :param ground_truth_idx: Bx1 tensor with index of ground truth class
+        :return: Mean reciprocal rank score
+        """
+        assert predictions.size(0) == ground_truth_idx.size(0)
+
+        indices = predictions.argsort()
+        return (1.0 / (indices == ground_truth_idx).nonzero()[:, 1].float().add(1.0)).sum().item()
+
 
 if __name__ == '__main__':
     train_data_set = TrainSet()

@@ -3,6 +3,7 @@ from torch import optim, nn
 from torch.utils.data import Dataset, DataLoader
 from model import TranE
 from prepare_data import TrainSet, TestSet
+import numpy as np
 
 device = torch.device('cuda')
 embed_dim = 50
@@ -55,11 +56,45 @@ def main():
             data = torch.transpose(data, 0, 1)
             corrct_test += transe.tail_predict(data[0], data[1], data[2], k=top_k)
         print(f"===>epoch {epoch+1}, test accuracy {corrct_test/test_dataset.__len__()}")
+        break
 
     import pdb
     pdb.set_trace()
-    a = 1
-    b = 2
+    corrct_test_top1_head = 0
+    corrct_test_top1_tail = 0
+    corrct_test_top3_head = 0
+    corrct_test_top3_tail = 0
+    corrct_test_top10_head = 0
+    corrct_test_top10_tail = 0
+    mrr_average = []
+    for batch_idx, data in enumerate(test_loader):
+        data = data.to(device)
+        # data: [batch_size, 3] => [3, batch_size]
+        data = torch.transpose(data, 0, 1)
+        corrct_test_top1_tail += transe.tail_predict(data[0], data[1], data[2], k=1)
+        corrct_test_top1_head += transe.head_predict(data[0], data[1], data[2], k=1)
+        corrct_test_top3_tail += transe.tail_predict(data[0], data[1], data[2], k=3)
+        corrct_test_top3_head += transe.head_predict(data[0], data[1], data[2], k=3)
+        corrct_test_top10_tail += transe.tail_predict(data[0], data[1], data[2], k=10)
+        corrct_test_top10_head += transe.head_predict(data[0], data[1], data[2], k=10)
+        mrr_average.append(transe.mrr(data[0], data[1], data[2]))
+    print(f"Top 1 test accuracy {(corrct_test_top1_tail + corrct_test_top1_head)/ 2 /test_dataset.__len__()}")
+    print(f"Top 3 test accuracy {(corrct_test_top3_tail + corrct_test_top3_head)/ 2  / test_dataset.__len__()}")
+    print(f"Top 10 test accuracy {(corrct_test_top10_tail + corrct_test_top10_head)/ 2  / test_dataset.__len__()}")
+    print(f"MRR {np.mean(mrr_average)}")
+
+    import pdb
+    pdb.set_trace()
+    for batch_idx, data in enumerate(test_loader):
+        data = data.to(device)
+        # data: [batch_size, 3] => [3, batch_size]
+        data = torch.transpose(data, 0, 1)
+        top10_index = transe.tail_top_10(data[0], data[1], data[2])
+        train_dataset.index_to_relation
+        for v in top10_index:
+            print(train_dataset.index_to_entity[v])
+
+    transe.entity_embedding.weight.data
 
 
 

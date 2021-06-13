@@ -38,7 +38,9 @@ class TrainSet(Dataset):
         entity_list = list((head_count + tail_count).keys())
         relation_list = list(relation_count.keys())
         entity_dic = dict([(word, idx) for idx, word in enumerate(entity_list)])
+        self.index_to_entity = dict([(idx, word) for idx, word in enumerate(entity_list)])
         relation_dic = dict([(word, idx) for idx, word in enumerate(relation_list)])
+        self.index_to_relation = dict([(idx, word) for idx, word in enumerate(relation_list)])
         return raw_data.values, entity_dic, relation_dic
 
     def convert_word_to_index(self, data):
