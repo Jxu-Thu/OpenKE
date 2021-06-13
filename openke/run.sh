@@ -1,0 +1,1 @@
+python train_transe_FB15K237.py

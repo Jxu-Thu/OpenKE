@@ -6,6 +6,8 @@ from openke.module.strategy import NegativeSampling
 from openke.data import TrainDataLoader, TestDataLoader
 
 # dataloader for training
+import pdb
+pdb.set_trace()
 train_dataloader = TrainDataLoader(
 	in_path = "./benchmarks/FB15K237/", 
 	nbatches = 100,
