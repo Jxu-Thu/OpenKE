@@ -112,7 +112,7 @@ class TranE(nn.Module):
         return self._mrr(torch.norm(h_and_r + embed_tail, dim=2), head.view(-1, 1))
         # tail: [batch_size] => [batch_size, 1]
 
-    def mrr_(self, predictions: torch.Tensor, ground_truth_idx: torch.Tensor) -> float:
+    def _mrr(self, predictions: torch.Tensor, ground_truth_idx: torch.Tensor) -> float:
         """Calculates mean reciprocal rank (MRR) for given predictions and ground truth values.
         :param predictions: BxN tensor of prediction values where B is batch size and N number of classes. Predictions
         must be sorted in class ids order
