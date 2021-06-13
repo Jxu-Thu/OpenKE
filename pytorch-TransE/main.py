@@ -63,7 +63,6 @@ def main():
             data = torch.transpose(data, 0, 1)
             corrct_test += transe.tail_predict(data[0], data[1], data[2], k=top_k)
         print(f"===>epoch {epoch+1}, test accuracy {corrct_test/test_dataset.__len__()}")
-        break
 
     corrct_test_top1_head = 0
     corrct_test_top1_tail = 0
