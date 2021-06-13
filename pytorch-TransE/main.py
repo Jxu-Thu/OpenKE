@@ -17,6 +17,8 @@ top_k = 10
 
 
 def main():
+    import pdb
+    pdb.set_trace()
     train_dataset = TrainSet()
     test_dataset = TestSet()
     test_dataset.convert_word_to_index(train_dataset.entity_to_index, train_dataset.relation_to_index,
