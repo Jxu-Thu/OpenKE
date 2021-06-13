@@ -104,7 +104,8 @@ def main():
 
         print(f'------- {entity2label[head]} + {relation2label[relatioon]} = {entity2label[tail]} -----------')
         for i in range(10):
-            print(f'{entity2label[top_10_index_list[i]]}')
+            ind = top_10_index_list[i]
+            print(f'{ind} : {entity2label[ind]}')
         print('*'*10)
 
     for batch_idx, data in enumerate(test_loader):
@@ -131,7 +132,8 @@ def main():
 
         print(f'-------- find : {entity2label[head]} ---------')
         for i in range(10):
-            print(f'{entity2label[top_10_index_list[i]]}')
+            ind = top_10_index_list[i]
+            print(f'{ind} : {entity2label[top_10_index_list[i]]}')
         print('*'*10)
 
     for i in range(3):
