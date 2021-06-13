@@ -56,6 +56,12 @@ def main():
             corrct_test += transe.tail_predict(data[0], data[1], data[2], k=top_k)
         print(f"===>epoch {epoch+1}, test accuracy {corrct_test/test_dataset.__len__()}")
 
+    import pdb
+    pdb.set_trace()
+    a = 1
+    b = 2
+
+
 
 if __name__ == '__main__':
     main()
