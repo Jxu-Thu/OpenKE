@@ -1,0 +1,182 @@
+P452	industry
+P410	military rank
+P135	movement
+P641	sport
+P38	currency
+P172	ethnic group
+P3095	practiced by
+P17	country
+P2578	studies
+P1687	Wikidata property
+P1884	hair color
+P1303	instrument
+P3075	official religion
+P205	basin country
+P195	collection
+P159	headquarters location
+P1066	student of
+P1269	facet of
+P31	instance of
+P463	member of
+P1576	lifestyle
+P1056	product or material produced
+P53	family
+P1313	office held by head of government
+P1889	different from
+P512	academic degree
+P2515	costume designer
+P140	religion
+P6	head of government
+P509	cause of death
+P941	inspired by
+P1589	lowest point
+P150	contains administrative territorial entity
+P1080	from fictional universe
+P460	said to be the same as
+P344	director of photography
+P921	main subject
+P1441	present in work
+P542	officially opened by
+P25	mother
+P4969	derivative work
+P106	occupation
+P1027	conferred by
+P364	original language of film or TV show
+P1830	owner of
+P413	position played on team / speciality
+P607	conflict
+P421	located in time zone
+P371	presenter
+P277	programming language
+P6364	official color
+P1366	replaced by
+P112	founded by
+P361	part of
+P131	located in the administrative territorial entity
+P437	distribution
+P749	parent organization
+P1336	territory claimed by
+P291	place of publication
+P136	genre
+P1412	languages spoken, written or signed
+P1344	participant of
+P1963	properties for this type
+P501	enclave within
+P123	publisher
+P122	basic form of government
+P3275	storyboard artist
+P190	twinned administrative body
+P1001	applies to jurisdiction
+P1454	legal form
+P58	screenwriter
+P102	member of political party
+P5869	model item
+P404	game mode
+P1040	film editor
+P412	voice type
+P451	partner
+P780	symptoms
+P279	subclass of
+P511	honorific prefix
+P3966	programming paradigm
+P144	based on
+P840	narrative location
+P2341	indigenous to
+P937	work location
+P802	student
+P807	separated from
+P706	located on terrain feature
+P2554	production designer
+P461	opposite of
+P2283	uses
+P91	sexual orientation
+P1411	nominated for
+P725	voice actor
+P22	father
+P27	country of citizenship
+P36	capital
+P1327	professional or sports partner
+P175	performer
+P37	official language
+P1142	political ideology
+P3373	sibling
+P551	residence
+P272	production company
+P170	creator
+P1308	officeholder
+P2541	operating area
+P355	subsidiary
+P425	field of this occupation
+P162	producer
+P1365	replaces
+P35	head of state
+P527	has part
+P101	field of work
+P462	color
+P2579	studied by
+P495	country of origin
+P69	educated at
+P2936	language used
+P103	native language
+P360	is a list of
+P2438	narrator
+P1346	winner
+P156	followed by
+P1542	has effect
+P206	located in or next to body of water
+P119	place of burial
+P676	lyrics by
+P400	platform
+P50	author
+P1416	affiliation
+P161	cast member
+P276	location
+P674	characters
+P1995	health specialty
+P828	has cause
+P40	child
+P945	allegiance
+P800	notable work
+P3450	sports season of league or competition
+P740	location of formation
+P2512	series spin-off
+P750	distributor
+P26	spouse
+P127	owned by
+P30	continent
+P449	original network
+P710	participant
+P155	follows
+P19	place of birth
+P54	member of sports team
+P1435	heritage designation
+P118	league
+P138	named after
+P488	chairperson
+P1050	medical condition
+P47	shares border with
+P530	diplomatic relation
+P57	director
+P20	place of death
+P241	military branch
+P86	composer
+P179	part of the series
+P737	influenced by
+P1196	manner of death
+P178	developer
+P108	employer
+P1376	capital of
+P915	filming location
+P1877	after a work by
+P1532	country for sport
+P407	language of work or name
+P647	drafted by
+P3092	film crew member
+P264	record label
+P793	significant event
+P832	public holiday
+P1431	executive producer
+P166	award received
+P39	position held
+P1038	relative
+P5030	talk show guest
