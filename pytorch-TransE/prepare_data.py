@@ -25,7 +25,10 @@ class TrainSet(Dataset):
         return [self.pos_data[item], self.neg_data[item]]
 
     def load_text(self):
-        raw_data = pd.read_csv('./fb15k/freebase_mtr100_mte100-train.txt', sep='\t', header=None,
+        # raw_data = pd.read_csv('./fb15k/freebase_mtr100_mte100-train.txt', sep='\t', header=None,
+        #                        names=['head', 'relation', 'tail'],
+        #                        keep_default_na=False, encoding='utf-8')
+        raw_data = pd.read_csv('./Wiki15k/train.txt', sep='\t', header=None,
                                names=['head', 'relation', 'tail'],
                                keep_default_na=False, encoding='utf-8')
         raw_data = raw_data.applymap(lambda x: x.strip())
@@ -103,7 +106,11 @@ class TestSet(Dataset):
         return self.data.shape[0]
 
     def load_text(self):
-        raw_data = pd.read_csv('./fb15k/freebase_mtr100_mte100-test.txt', sep='\t', header=None,
+        # raw_data = pd.read_csv('./fb15k/freebase_mtr100_mte100-test.txt', sep='\t', header=None,
+        #                        names=['head', 'relation', 'tail'],
+        #                        keep_default_na=False, encoding='utf-8')
+
+        raw_data = pd.read_csv('./Wiki15k/test.txt', sep='\t', header=None,
                                names=['head', 'relation', 'tail'],
                                keep_default_na=False, encoding='utf-8')
         raw_data = raw_data.applymap(lambda x: x.strip())
