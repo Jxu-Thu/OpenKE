@@ -10,12 +10,12 @@ parser = argparse.ArgumentParser()
 
 # Required parameters
 # NOTE: train tasks and val tasks cannot take command line arguments
-parser.add_argument('--lr', default=0.01, type=float)
+parser.add_argument('--lr', default=0.02, type=float)
 args = parser.parse_args()
 device = torch.device('cuda')
 embed_dim = 50
 num_epochs = 50
-train_batch_size = 32
+train_bacatch_size = 32
 test_batch_size = 256
 lr = args.lr
 momentum = 0
@@ -89,9 +89,9 @@ def main():
         corrct_test_top10_tail += transe.tail_predict(data[0], data[1], data[2], k=10)
         corrct_test_top10_head += transe.head_predict(data[0], data[1], data[2], k=10)
         mrr_average.append(transe.mrr(data[0], data[1], data[2]))
-    print(f"Top 1 test accuracy {(corrct_test_top1_tail + corrct_test_top1_head)/ 2 /test_dataset.__len__()}")
-    print(f"Top 3 test accuracy {(corrct_test_top3_tail + corrct_test_top3_head)/ 2  / test_dataset.__len__()}")
-    print(f"Top 10 test accuracy {(corrct_test_top10_tail + corrct_test_top10_head)/ 2  / test_dataset.__len__()}")
+    print(f"Top 1 test accuracy {(corrct_test_top1_tail + corrct_test_top1_head) /test_dataset.__len__()}")
+    print(f"Top 3 test accuracy {(corrct_test_top3_tail + corrct_test_top3_head)  / test_dataset.__len__()}")
+    print(f"Top 10 test accuracy {(corrct_test_top10_tail + corrct_test_top10_head)  / test_dataset.__len__()}")
     print(f"MRR {np.mean(mrr_average)}")
 
     def print_relation(head, relatioon, tail, top_10_index):
